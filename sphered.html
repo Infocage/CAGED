@@ -1,67 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPHERED — The Seven Dimensions of CAGED</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0b0c0f; color: #c8cdd6; min-height: 100vh; }
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 18px 40px; border-bottom: 1px solid rgba(255,255,255,0.04); position: sticky; top: 0; background: rgba(4,10,6,0.97); z-index: 100; backdrop-filter: blur(8px); }
-        .nav-brand { font-size: 1em; font-weight: 600; letter-spacing: 0.18em; color: #c8960b; text-decoration: none; }
-        .nav-links { display: flex; gap: 32px; }
-        .nav-links a { color: #4a5a4a; text-decoration: none; font-size: 0.82em; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
-        .nav-links a:hover, .nav-links a.active { color: #c8cdd6; }
-        .hero { text-align: center; padding: 72px 20px 52px; border-bottom: 1px solid rgba(255,255,255,0.04); }
-        .hero .tag { display: inline-block; font-size: 0.65em; letter-spacing: 0.22em; color: #3a4a3a; border: 1px solid #1e2e1e; padding: 3px 12px; border-radius: 2px; margin-bottom: 20px; text-transform: uppercase; }
-        .hero h1 { font-size: 3.5em; font-weight: 200; letter-spacing: 0.2em; color: #e2e8e0; margin-bottom: 16px; }
-        .hero .sub { font-size: 1em; color: #4a5a4a; max-width: 580px; margin: 0 auto; line-height: 1.8; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-        #canvas-container { width: 100%; height: 560px; background: radial-gradient(circle at 50% 40%, #0a1a0f 0%, #040a06 60%, #020402 100%); border-radius: 4px; overflow: hidden; margin: 40px 0 12px; border: 1px solid rgba(255,255,255,0.04); }
-        canvas { display: block; cursor: grab; }
-        canvas:active { cursor: grabbing; }
-        .hint { text-align: center; margin-bottom: 52px; color: #1a2a1a; font-size: 0.78em; letter-spacing: 0.12em; text-transform: uppercase; }
-        .section-label { font-size: 0.65em; letter-spacing: 0.28em; color: #2d3d2d; text-transform: uppercase; margin-bottom: 28px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.04); }
-        .dims-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; margin-bottom: 60px; }
-        .dcard { background: #0a0f0a; border-radius: 3px; padding: 26px; border: 1px solid #1a2a1a; border-left: 3px solid; transition: background 0.2s; }
-        .dcard:hover { background: #0d140d; }
-        .dcard .cat { font-size: 0.68em; color: #2d3d2d; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.14em; }
-        .dcard h3 { font-size: 1.2em; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; font-weight: 400; letter-spacing: 0.04em; flex-wrap: wrap; }
-        .badge { font-size: 0.5em; padding: 3px 9px; border-radius: 2px; font-weight: 600; letter-spacing: 0.1em; border: 1px solid; white-space: nowrap; text-transform: uppercase; }
-        .dcard .desc { font-size: 0.88em; line-height: 1.85; color: #4a5a4a; }
-        .threats { background: rgba(139,16,16,0.06); border-left: 2px solid rgba(139,16,16,0.3); padding: 14px 16px; margin-top: 16px; border-radius: 2px; }
-        .threats h4 { color: #6a2a2a; font-size: 0.7em; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 10px; }
-        .threats ul { list-style: none; font-size: 0.83em; line-height: 1.8; color: #3a2a2a; }
-        .threats li::before { content: "— "; color: #4a2a2a; }
-        footer { padding: 28px 40px; border-top: 1px solid rgba(255,255,255,0.04); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; background: #040a06; }
-        footer .ft-left { font-size: 0.75em; color: #2a3a2a; letter-spacing: 0.06em; line-height: 1.9; }
-        footer .ft-left a { color: #3a5a3a; text-decoration: none; }
-        footer .ft-left a:hover { color: #c8cdd6; }
-        footer .ft-right { font-size: 0.7em; color: #1e2e1e; letter-spacing: 0.08em; }
-        @media(max-width:768px){ nav { padding: 14px 20px; } .nav-links { display: none; } .hero { padding: 48px 20px 36px; } .hero h1 { font-size: 2.4em; } #canvas-container { height: 360px; } footer { padding: 20px; } }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPHERED - The Seven Dimensions of CAGED</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#0b0c0f;color:#c8cdd6;min-height:100vh}
+nav{display:flex;justify-content:space-between;align-items:center;padding:18px 40px;border-bottom:1px solid rgba(255,255,255,0.04);position:sticky;top:0;background:rgba(4,10,6,0.97);z-index:100;backdrop-filter:blur(8px)}
+.nav-brand{font-size:1em;font-weight:600;letter-spacing:0.18em;color:#c8960b;text-decoration:none}
+.nav-links{display:flex;gap:32px}
+.nav-links a{color:#4a5a4a;text-decoration:none;font-size:0.82em;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover,.nav-links a.active{color:#c8cdd6}
+.hero{text-align:center;padding:72px 20px 52px;border-bottom:1px solid rgba(255,255,255,0.04)}
+.tag{display:inline-block;font-size:0.65em;letter-spacing:0.22em;color:#3a4a3a;border:1px solid #1e2e1e;padding:3px 12px;border-radius:2px;margin-bottom:20px;text-transform:uppercase}
+.hero h1{font-size:3.5em;font-weight:200;letter-spacing:0.2em;color:#e2e8e0;margin-bottom:16px}
+.hero p{font-size:1em;color:#4a5a4a;max-width:580px;margin:0 auto;line-height:1.8}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+#canvas-container{width:100%;height:560px;background:radial-gradient(circle at 50% 40%,#0a1a0f 0%,#040a06 60%,#020402 100%);border-radius:4px;overflow:hidden;margin:40px 0 12px;border:1px solid rgba(255,255,255,0.04)}
+canvas{display:block;cursor:grab}
+canvas:active{cursor:grabbing}
+.hint{text-align:center;margin-bottom:52px;color:#1a2a1a;font-size:0.78em;letter-spacing:0.12em;text-transform:uppercase}
+.section-label{font-size:0.65em;letter-spacing:0.28em;color:#2d3d2d;text-transform:uppercase;margin-bottom:28px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.04)}
+.dims-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px;margin-bottom:60px}
+.dcard{background:#0a0f0a;border-radius:3px;padding:26px;border:1px solid #1a2a1a;border-left:3px solid;transition:background 0.2s}
+.dcard:hover{background:#0d140d}
+.dcat{font-size:0.68em;color:#2d3d2d;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.14em}
+.dcard h3{font-size:1.2em;margin-bottom:12px;display:flex;align-items:center;gap:10px;font-weight:400;letter-spacing:0.04em;flex-wrap:wrap}
+.badge{font-size:0.5em;padding:3px 9px;border-radius:2px;font-weight:600;letter-spacing:0.1em;border:1px solid;white-space:nowrap;text-transform:uppercase}
+.ddesc{font-size:0.88em;line-height:1.85;color:#4a5a4a}
+.threats{background:rgba(139,16,16,0.06);border-left:2px solid rgba(139,16,16,0.3);padding:14px 16px;margin-top:16px;border-radius:2px}
+.threats h4{color:#6a2a2a;font-size:0.7em;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px}
+.threats ul{list-style:none;font-size:0.83em;line-height:1.8;color:#3a2a2a}
+.threats li:before{content:"-- ";color:#4a2a2a}
+footer{padding:28px 40px;border-top:1px solid rgba(255,255,255,0.04);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;background:#040a06}
+.ft-left{font-size:0.75em;color:#2a3a2a;letter-spacing:0.06em;line-height:1.9}
+.ft-left a{color:#3a5a3a;text-decoration:none}
+.ft-right{font-size:0.7em;color:#1e2e1e;letter-spacing:0.08em}
+@media(max-width:768px){nav{padding:14px 20px}.nav-links{display:none}.hero{padding:48px 20px 36px}.hero h1{font-size:2.4em}#canvas-container{height:360px}footer{padding:20px}}
+</style>
 </head>
 <body>
-
 <nav>
-    <a class="nav-brand" href="index.html">C.A.G.E.D.</a>
-    <div class="nav-links">
-        <a href="sphered.html" class="active">SPHERED</a>
-        <a href="caged-engine.html">Engine</a>
-        <a href="caged-corpus.html">Corpus</a>
-        <a href="https://infocage.github.io/CAGE-/index.html" target="_blank">CAGE</a>
-        <a href="https://infocage.github.io/kultr" target="_blank">KULTR</a>
-    </div>
-</nav>
-
-<div class="hero">
-    <div class="tag">CAGED Framework</div>
-    <h1>SPHERED</h1>
-    <p class="sub">Seven independent dimensions of operational defence — a continuous, multi-domain model for the threats that exist now and those that are coming</p>
+<a class="nav-brand" href="index.html">C.A.G.E.D.</a>
+<div class="nav-links">
+<a href="sphered.html" class="active">SPHERED</a>
+<a href="caged-engine.html">Engine</a>
+<a href="caged-corpus.html">Corpus</a>
+<a href="https://infocage.github.io/CAGE-/index.html" target="_blank">CAGE</a>
+<a href="https://infocage.github.io/kultr" target="_blank">KULTR</a>
 </div>
-
+</nav>
+<div class="hero">
+<div class="tag">CAGED Framework</div>
+<h1>SPHERED</h1>
+<p>Seven independent dimensions of operational defence - a continuous, multi-domain model for the threats that exist now and those that are coming</p>
+</div>
 <div class="container">
-    <div id="canvas-container"><canvas id="sc"></canvas></div>
+<div id="canvas-container"><canvas id="sc"></canvas></div>
+<div class="hint">drag to rotate &nbsp;&#183;&nbsp; watch dimensions interact as rings pass through each other</div>
+<div class="section-label">The Seven SPHERED Dimensions</div>
+<div id="dgrid" class="dims-grid"></div>
+</div>
+<footer>
+<div class="ft-left">
+<strong style="color:#3a5a3a;letter-spacing:0.1em">CAGED Framework</strong> - Continuous Active Governance Engine for Defence<br>
+Shamus Coghlan, CISSP &nbsp;&#183;&nbsp; Berlin &nbsp;&#183;&nbsp;
+<a href="https://www.linkedin.com/in/shamus-coghlan/" target="_blank">LinkedIn</a> &nbsp;&#183;&nbsp;
+<a href="https://infocage.github.io/CAGE-/index.html" target="_blank">CAGE</a> &nbsp;&#183;&nbsp;
+<a href="https://infocage.github.io/kultr" target="_blank">KULTR</a>
+</div>
+<div class="ft-right">Apache License 2.0 &nbsp;&#183;&nbsp; infocage</div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+var dims = [
+  { name:'Security', cat:'Operational Confidentiality', badge:'Core', col:0x4a7fa5, cs:'#4a7fa5', bc:'#2a4a62', bb:'#2a4a62', bco:'#3a6a8a', xRot:0.003, yRot:0.004, desc:'Who sees what, at which echelon, right now. Need-to-know is not a policy checkbox in defence - it is a live engine state enforced continuously. Information reaching the wrong level too early or too late can compromise an entire operation.', threats:null },
+  { name:'Provenance', cat:'Verified Origin of Orders and Intelligence', badge:'Elevated', col:0x3a8a62, cs:'#3a8a62', bc:'#1e4a34', bb:'#1e4a34', bco:'#2a6a4a', xRot:-0.004, yRot:0.003, desc:'Is this order authentic? Is this intelligence from a trusted, uncompromised source? Chain of custody verified at every node, continuously. Unlike Hardening which confirms data was not changed, Provenance confirms it came from the right source through an unbroken chain. In an age of AI-generated content and deepfake command, this is the difference between acting on truth and acting on adversary fiction.', threats:['AI-generated orders from spoofed commanders','Compromised intelligence feeds turned by the adversary','Injected operational orders in degraded communications','Supply chain compromise of defence systems at origin'] },
+  { name:'Hardening', cat:'Mission Data Integrity', badge:'Core', col:0x3a7a8a, cs:'#3a7a8a', bc:'#1e3a42', bb:'#1e3a42', bco:'#2a5a68', xRot:0.004, yRot:-0.003, desc:'Operational data remains unaltered. Tamper detection running at mission speed. A corrupted targeting order, a modified grid reference, an altered logistics report - each is as dangerous as a direct hostile action and harder to detect because it appears entirely legitimate.', threats:null },
+  { name:'Evidence', cat:'Command Accountability', badge:'Elevated', col:0x6a4a8a, cs:'#6a4a8a', bc:'#3a2a5a', bb:'#3a2a5a', bco:'#4a3a72', xRot:-0.003, yRot:-0.004, desc:'Every decision, order and action is attributable, timestamped and undeniable. The audit trail is continuous - not retrospective. As autonomous systems and AI-assisted decision-making become operational realities, the accountability chain must be unbreakable. Who authorised this? Which system executed it? When?', threats:['Deniable orders in autonomous engagement chains','Attribution gaps across coalition command structures','Adversary manipulation of command logs post-incident','Rules of Engagement accountability under international law'] },
+  { name:'Resilience', cat:'Continuity Under Adversarial Conditions', badge:'Core', col:0x8a6a2a, cs:'#8a6a2a', bc:'#4a3a18', bb:'#4a3a18', bco:'#6a5020', xRot:0.003, yRot:0.005, desc:'Operate degraded. Recover fast. Never lose the operational picture regardless of what the adversary destroys, disrupts or denies. Resilience in defence is not disaster recovery - it is the continuous capacity to sustain mission awareness and command function while under active attack across multiple domains simultaneously.', threats:null },
+  { name:'Environment', cat:'Operational Domain Context', badge:'New', col:0x4a5468, cs:'#6a7a92', bc:'#2a3040', bb:'#2a3040', bco:'#3a4558', xRot:-0.004, yRot:0.002, desc:'Cyber, kinetic, hybrid, cognitive, space. The active domain shapes how every other dimension must operate. A Provenance failure in a cyber environment looks entirely different from one in a kinetic operation. SPHERED is multi-domain by design - the same seven dimensions govern across all theatres, calibrated to the environment in which they operate.', threats:null },
+  { name:'Defence', cat:'Active Posture - Full Spectrum', badge:'Defence-Exclusive', col:0xb8860b, cs:'#c8960b', bc:'#5a4000', bb:'#6a4a00', bco:'#9a7000', xRot:0.005, yRot:-0.004, desc:'Not passive protection. Continuous dual-posture awareness - defensive and offensive simultaneously. Not a toggle. A live engine state that reads across all six other dimensions and surfaces to command the critical question in real time: are we winning or losing this operation right now, and when must the posture shift? This dimension has no equivalent in any existing information security framework. It exists only in SPHERED because only defence requires it.', threats:['Posture lag - operating defensively while the situation demands offensive action','Missed escalation signals buried in multi-domain operational noise','Infrastructure attacks misread as tactical when they are strategic','Shaping operations that precede a larger adversary action going undetected'] }
+];
+
+var grid = document.getElementById('dgrid');
+for (var i = 0; i < dims.length; i++) {
+  var d = dims[i];
+  var card = document.createElement('div');
+  card.className = 'dcard';
+  card.style.borderLeftColor = d.bc;
+  var inner = '<div class="dcat">' + d.cat + '</div>';
+  inner += '<h3 style="color:' + d.cs + '">' + d.name + ' <span class="badge" style="color:' + d.bco + ';border-color:' + d.bb + '">' + d.badge.toUpperCase() + '</span></h3>';
+  inner += '<div class="ddesc">' + d.desc + '</div>';
+  if (d.threats) {
+    inner += '<div class="threats"><h4>Threat vectors this dimension addresses</h4><ul>';
+    for (var j = 0; j < d.threats.length; j++) {
+      inner += '<li>' + d.threats[j] + '</li>';
+    }
+    inner += '</ul></div>';
+  }
+  card.innerHTML = inner;
+  grid.appendChild(card);
+}
+
+var container = document.getElementById('canvas-container');
+var canvas = document.getElementById('sc');
+var scene = new THREE.Scene();
+scene.background = new THREE.Color(0x040a06);
+var camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+camera.position.z = 10;
+var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+renderer.setSize(container.clientWidth, container.clientHeight);
+var R = 3;
+scene.add(new THREE.Mesh(new THREE.SphereGeometry(R, 24, 24), new THREE.MeshBasicMaterial({ color: 0x141820, wireframe: true, transparent: true, opacity: 0.18 })));
+scene.add(new THREE.AmbientLight(0xffffff, 0.25));
+var pl = new THREE.PointLight(0xffffff, 0.6);
+pl.position.set(10, 10, 10);
+scene.add(pl);
+var pl2 = new THREE.PointLight(0x4466aa, 0.3);
+pl2.position.set(-8, -6, 4);
+scene.add(pl2);
+var rings = [];
+for (var i = 0; i < dims.length; i++) {
+  var d = dims[i];
+  var rg = new THREE.Group();
+  scene.add(rg);
+  var ring = new THREE.Mesh(new THREE.TorusGeometry(R, 0.04, 16, 100), new THREE.MeshBasicMaterial({ color: d.col, transparent: true, opacity: 0.65 }));
+  rg.add(ring);
+  var ball = new THREE.Mesh(new THREE.SphereGeometry(0.18, 16, 16), new THREE.MeshPhongMaterial({ color: d.col, emissive: d.col, emissiveIntensity: 1.0 }));
+  ball.position.set(R, 0, 0);
+  ring.add(ball);
+  rings.push({ group: rg, xRot: d.xRot, yRot: d.yRot });
+}
+var isDragging = false;
+var prevX = 0;
+var prevY = 0;
+var userRotX = 0;
+var userRotY = 0;
+canvas.addEventListener('mousedown', function(e) { isDragging = true; prevX = e.clientX; prevY = e.clientY; });
+window.addEventListener('mousemove', function(e) { if (!isDragging) return; userRotY += (e.clientX - prevX) * 0.01; userRotX += (e.clientY - prevY) * 0.01; prevX = e.clientX; prevY = e.clientY; });
+window.addEventListener('mouseup', function() { isDragging = false; });
+canvas.addEventListener('touchstart', function(e) { isDragging = true; prevX = e.touches[0].clientX; prevY = e.touches[0].clientY; }, { passive: true });
+window.addEventListener('touchmove', function(e) { if (!isDragging) return; userRotY += (e.touches[0].clientX - prevX) * 0.01; userRotX += (e.touches[0].clientY - prevY) * 0.01; prevX = e.touches[0].clientX; prevY = e.touches[0].clientY; }, { passive: true });
+window.addEventListener('touchend', function() { isDragging = false; });
+function animate() {
+  requestAnimationFrame(animate);
+  for (var i = 0; i < rings.length; i++) {
+    rings[i].group.rotation.x += rings[i].xRot;
+    rings[i].group.rotation.y += rings[i].yRot;
+  }
+  scene.rotation.x = userRotX;
+  scene.rotation.y = userRotY;
+  renderer.render(scene, camera);
+}
+animate();
+window.addEventListener('resize', function() {
+  camera.aspect = container.clientWidth / container.clientHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(container.clientWidth, container.clientHeight);
+});
+</script>
+</body>
+</html>    <div id="canvas-container"><canvas id="sc"></canvas></div>
     <div class="hint">drag to rotate &nbsp;·&nbsp; watch dimensions interact as rings pass through each other</div>
     <div class="section-label">The Seven SPHERED Dimensions</div>
     <div class="dims-grid" id="dgrid"></div>
