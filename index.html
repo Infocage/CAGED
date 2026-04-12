@@ -6,289 +6,64 @@
     <title>C.A.G.E.D. — Continuous Active Governance Engine for Defence</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0b0c0f;
-            color: #c8cdd6;
-            min-height: 100vh;
-        }
-
-        /* NAV */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 18px 40px;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
-            position: sticky;
-            top: 0;
-            background: rgba(11,12,15,0.97);
-            z-index: 100;
-            backdrop-filter: blur(8px);
-        }
-        .nav-brand {
-            font-size: 1em;
-            font-weight: 600;
-            letter-spacing: 0.18em;
-            color: #c8960b;
-            text-decoration: none;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0b0c0f; color: #c8cdd6; min-height: 100vh; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 18px 40px; border-bottom: 1px solid rgba(255,255,255,0.04); position: sticky; top: 0; background: rgba(4,10,6,0.97); z-index: 100; backdrop-filter: blur(8px); }
+        .nav-brand { font-size: 1em; font-weight: 600; letter-spacing: 0.18em; color: #c8960b; text-decoration: none; }
         .nav-links { display: flex; gap: 32px; }
-        .nav-links a {
-            color: #4a5568;
-            text-decoration: none;
-            font-size: 0.82em;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            transition: color 0.2s;
-        }
+        .nav-links a { color: #4a5a4a; text-decoration: none; font-size: 0.82em; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
         .nav-links a:hover { color: #c8cdd6; }
-
-        /* HERO */
-        .hero {
-            text-align: center;
-            padding: 100px 20px 80px;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
-            background: radial-gradient(ellipse at center top, rgba(180,134,11,0.06) 0%, transparent 70%);
-        }
-        .hero .tag {
-            display: inline-block;
-            font-size: 0.65em;
-            letter-spacing: 0.28em;
-            color: #4a5568;
-            border: 1px solid #2d3748;
-            padding: 4px 14px;
-            border-radius: 2px;
-            margin-bottom: 24px;
-            text-transform: uppercase;
-        }
-        .hero h1 {
-            font-size: 4.5em;
-            font-weight: 200;
-            letter-spacing: 0.22em;
-            color: #e2e8f0;
-            margin-bottom: 8px;
-            line-height: 1.1;
-        }
-        .hero h1 span { color: #c8960b; }
-        .hero .full-name {
-            font-size: 0.85em;
-            color: #4a5568;
-            letter-spacing: 0.12em;
-            margin-bottom: 32px;
-            text-transform: uppercase;
-        }
-        .hero .lead {
-            font-size: 1.15em;
-            color: #6a7a8a;
-            max-width: 640px;
-            margin: 0 auto 48px;
-            line-height: 1.8;
-        }
+        #hero-cc { width: 100%; height: 560px; background: radial-gradient(circle at 50% 40%, #0a1a0f 0%, #040a06 60%, #020402 100%); position: relative; }
+        #hero-cc canvas { display: block; }
+        #hero-lbl { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); text-align: center; pointer-events: none; white-space: nowrap; }
+        #hero-lbl .l1 { font-size: 13px; letter-spacing: 0.4em; color: #3a5a2a; text-transform: uppercase; }
+        #hero-lbl .l2 { font-size: 10px; letter-spacing: 0.15em; color: #1a2e14; text-transform: uppercase; margin-top: 5px; }
+        .hero-text { text-align: center; padding: 52px 20px 48px; border-bottom: 1px solid rgba(255,255,255,0.04); background: linear-gradient(180deg, #020402 0%, #0b0c0f 100%); }
+        .hero-text .tag { display: inline-block; font-size: 0.65em; letter-spacing: 0.28em; color: #3a4a3a; border: 1px solid #1e2e1e; padding: 4px 14px; border-radius: 2px; margin-bottom: 24px; text-transform: uppercase; }
+        .hero-text h1 { font-size: 4em; font-weight: 200; letter-spacing: 0.22em; color: #e2e8e0; margin-bottom: 8px; }
+        .hero-text h1 span { color: #c8960b; }
+        .hero-text .full-name { font-size: 0.82em; color: #3a4a3a; letter-spacing: 0.14em; margin-bottom: 28px; text-transform: uppercase; }
+        .hero-text .lead { font-size: 1.05em; color: #4a5a4a; max-width: 620px; margin: 0 auto 40px; line-height: 1.85; }
         .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-        .btn-primary {
-            background: #c8960b;
-            color: #0b0c0f;
-            padding: 12px 32px;
-            border-radius: 2px;
-            text-decoration: none;
-            font-size: 0.82em;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            transition: background 0.2s;
-        }
+        .btn-primary { background: #c8960b; color: #020402; padding: 12px 32px; border-radius: 2px; text-decoration: none; font-size: 0.8em; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; transition: background 0.2s; }
         .btn-primary:hover { background: #e8b020; }
-        .btn-secondary {
-            border: 1px solid #2d3748;
-            color: #6a7a8a;
-            padding: 12px 32px;
-            border-radius: 2px;
-            text-decoration: none;
-            font-size: 0.82em;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            transition: border-color 0.2s, color 0.2s;
-        }
-        .btn-secondary:hover { border-color: #6a7a8a; color: #c8cdd6; }
-
-        /* PROBLEM */
+        .btn-secondary { border: 1px solid #2a3a2a; color: #4a5a4a; padding: 12px 32px; border-radius: 2px; text-decoration: none; font-size: 0.8em; letter-spacing: 0.12em; text-transform: uppercase; transition: border-color 0.2s, color 0.2s; }
+        .btn-secondary:hover { border-color: #4a6a4a; color: #c8cdd6; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-
-        .section { padding: 80px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
-
-        .section-label {
-            font-size: 0.65em;
-            letter-spacing: 0.28em;
-            color: #4a5568;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-        }
-        .section-title {
-            font-size: 2.2em;
-            font-weight: 300;
-            color: #e2e8f0;
-            margin-bottom: 24px;
-            letter-spacing: 0.04em;
-        }
+        .section { padding: 72px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+        .section-label { font-size: 0.65em; letter-spacing: 0.28em; color: #2d3d2d; text-transform: uppercase; margin-bottom: 16px; }
+        .section-title { font-size: 2em; font-weight: 300; color: #e2e8e0; margin-bottom: 20px; }
         .section-title span { color: #c8960b; }
-
-        .problem-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 16px;
-            margin-top: 40px;
-        }
-        .problem-item {
-            background: #0f1117;
-            border: 1px solid #1a1e28;
-            border-left: 3px solid #dc2626;
-            padding: 20px;
-            border-radius: 2px;
-        }
-        .problem-item h4 {
-            color: #c87070;
-            font-size: 0.85em;
-            letter-spacing: 0.08em;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-        }
-        .problem-item p { font-size: 0.88em; color: #4a5568; line-height: 1.7; }
-
-        /* SPEED GAP */
-        .speed-gap {
-            background: #0f1117;
-            border: 1px solid #1a1e28;
-            border-radius: 3px;
-            padding: 48px 40px;
-            margin-top: 40px;
-            text-align: center;
-        }
-        .speed-row {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            margin: 32px 0;
-        }
-        .speed-item { text-align: center; }
-        .speed-number {
-            font-size: 3.5em;
-            font-weight: 200;
-            letter-spacing: 0.06em;
-            margin-bottom: 8px;
-        }
-        .speed-number.danger { color: #dc2626; }
-        .speed-number.safe { color: #c8960b; }
-        .speed-label { font-size: 0.78em; color: #4a5568; letter-spacing: 0.1em; text-transform: uppercase; }
-        .speed-vs {
-            font-size: 1.5em;
-            color: #2d3748;
-            font-weight: 200;
-        }
-        .speed-caption { font-size: 0.9em; color: #4a5568; max-width: 520px; margin: 0 auto; line-height: 1.7; }
-
-        /* SOLUTION */
-        .solution-text {
-            font-size: 1.05em;
-            color: #6a7a8a;
-            line-height: 1.9;
-            max-width: 720px;
-            margin-bottom: 48px;
-        }
-
-        .process-steps {
-            display: flex;
-            gap: 0;
-            flex-wrap: wrap;
-            margin-top: 40px;
-        }
-        .step {
-            flex: 1;
-            min-width: 200px;
-            padding: 28px 24px;
-            background: #0f1117;
-            border: 1px solid #1a1e28;
-            border-right: none;
-            position: relative;
-        }
-        .step:last-child { border-right: 1px solid #1a1e28; }
-        .step-num {
-            font-size: 0.65em;
-            letter-spacing: 0.2em;
-            color: #c8960b;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-        .step h4 {
-            font-size: 1em;
-            font-weight: 500;
-            color: #e2e8f0;
-            margin-bottom: 10px;
-            letter-spacing: 0.04em;
-        }
-        .step p { font-size: 0.82em; color: #4a5568; line-height: 1.7; }
-
-        /* NAV CARDS */
-        .nav-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 16px;
-            margin-top: 48px;
-        }
-        .nav-card {
-            background: #0f1117;
-            border: 1px solid #1a1e28;
-            border-top: 2px solid;
-            padding: 28px 24px;
-            border-radius: 2px;
-            text-decoration: none;
-            transition: background 0.2s;
-            display: block;
-        }
-        .nav-card:hover { background: #111318; }
-        .nav-card .nc-label {
-            font-size: 0.65em;
-            letter-spacing: 0.2em;
-            color: #4a5568;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-        .nav-card h3 {
-            font-size: 1.1em;
-            font-weight: 400;
-            margin-bottom: 10px;
-            letter-spacing: 0.04em;
-        }
-        .nav-card p { font-size: 0.82em; color: #4a5568; line-height: 1.6; }
-
-        /* FOOTER */
-        footer {
-            padding: 32px 40px;
-            border-top: 1px solid rgba(255,255,255,0.04);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-        footer .ft-left { font-size: 0.78em; color: #2d3748; letter-spacing: 0.06em; line-height: 1.8; }
-        footer .ft-left a { color: #4a5568; text-decoration: none; }
+        .section-text { font-size: 1em; color: #4a5a4a; line-height: 1.9; max-width: 700px; margin-bottom: 40px; }
+        .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-top: 36px; }
+        .problem-item { background: #0a0f0a; border: 1px solid #1a2a1a; border-left: 2px solid #8b1010; padding: 20px; border-radius: 2px; }
+        .problem-item h4 { color: #7a3030; font-size: 0.8em; letter-spacing: 0.1em; margin-bottom: 8px; text-transform: uppercase; }
+        .problem-item p { font-size: 0.85em; color: #3a4a3a; line-height: 1.75; }
+        .speed-gap { background: #0a0f0a; border: 1px solid #1a2a1a; border-radius: 2px; padding: 44px 40px; margin-top: 36px; text-align: center; }
+        .speed-row { display: flex; justify-content: center; align-items: center; gap: 48px; flex-wrap: wrap; margin: 28px 0; }
+        .speed-number { font-size: 3.2em; font-weight: 200; letter-spacing: 0.06em; margin-bottom: 8px; }
+        .speed-number.danger { color: #8b1010; }
+        .speed-number.key { color: #c8960b; }
+        .speed-label { font-size: 0.75em; color: #2d3d2d; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.6; }
+        .speed-vs { font-size: 1.2em; color: #1a2a1a; }
+        .speed-caption { font-size: 0.88em; color: #3a4a3a; max-width: 500px; margin: 0 auto; line-height: 1.75; }
+        .process-steps { display: flex; gap: 0; flex-wrap: wrap; margin-top: 36px; }
+        .step { flex: 1; min-width: 200px; padding: 26px 22px; background: #0a0f0a; border: 1px solid #1a2a1a; border-right: none; }
+        .step:last-child { border-right: 1px solid #1a2a1a; }
+        .step-num { font-size: 0.62em; letter-spacing: 0.2em; color: #c8960b; text-transform: uppercase; margin-bottom: 10px; }
+        .step h4 { font-size: 0.95em; font-weight: 500; color: #8a9a8a; margin-bottom: 8px; }
+        .step p { font-size: 0.8em; color: #3a4a3a; line-height: 1.75; }
+        .nav-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-top: 40px; }
+        .nav-card { background: #0a0f0a; border: 1px solid #1a2a1a; border-top: 2px solid; padding: 26px 22px; border-radius: 2px; text-decoration: none; transition: background 0.2s; display: block; }
+        .nav-card:hover { background: #0d140d; }
+        .nav-card .nc-label { font-size: 0.62em; letter-spacing: 0.2em; color: #2d3d2d; text-transform: uppercase; margin-bottom: 10px; }
+        .nav-card h3 { font-size: 1.05em; font-weight: 400; margin-bottom: 10px; }
+        .nav-card p { font-size: 0.8em; color: #3a4a3a; line-height: 1.65; }
+        footer { padding: 28px 40px; border-top: 1px solid rgba(255,255,255,0.04); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; background: #040a06; }
+        footer .ft-left { font-size: 0.75em; color: #2a3a2a; letter-spacing: 0.06em; line-height: 1.9; }
+        footer .ft-left a { color: #3a5a3a; text-decoration: none; }
         footer .ft-left a:hover { color: #c8cdd6; }
-        footer .ft-right { font-size: 0.72em; color: #2d3748; letter-spacing: 0.08em; }
-
-        /* RESPONSIVE */
-        @media(max-width:768px){
-            nav { padding: 14px 20px; }
-            .nav-links { display: none; }
-            .hero { padding: 60px 20px 50px; }
-            .hero h1 { font-size: 2.8em; }
-            .section { padding: 52px 0; }
-            .speed-gap { padding: 32px 20px; }
-            footer { padding: 24px 20px; }
-        }
+        footer .ft-right { font-size: 0.7em; color: #1e2e1e; letter-spacing: 0.08em; }
+        @media(max-width:768px){ nav { padding: 14px 20px; } .nav-links { display: none; } #hero-cc { height: 340px; } .hero-text h1 { font-size: 2.6em; } .section { padding: 48px 0; } footer { padding: 20px; } }
     </style>
 </head>
 <body>
@@ -304,155 +79,80 @@
     </div>
 </nav>
 
-<!-- HERO -->
-<div class="hero">
+<div id="hero-cc">
+    <canvas id="heroCanvas"></canvas>
+    <div id="hero-lbl">
+        <div class="l1">C · A · G · E · D</div>
+        <div class="l2">Continuous Active Governance Engine for Defence</div>
+    </div>
+</div>
+
+<div class="hero-text">
     <div class="tag">infocage framework family</div>
     <h1>C.A.G.E.<span>D.</span></h1>
     <div class="full-name">Continuous Active Governance Engine for Defence</div>
-    <p class="lead">
-        The decision cycle gap is the most dangerous vulnerability in modern defence.
-        CAGED closes it — a continuous operational governance engine that reads across
-        all SPHERED dimensions in real time and tells command what is happening,
-        what it means, and when the posture must shift.
-    </p>
+    <p class="lead">The decision cycle gap is the most dangerous vulnerability in modern defence. CAGED closes it — a continuous operational governance engine that reads across all SPHERED dimensions in real time and tells command what is happening, what it means, and when the posture must shift.</p>
     <div class="hero-buttons">
         <a href="sphered.html" class="btn-primary">Explore SPHERED</a>
         <a href="caged-engine.html" class="btn-secondary">The Engine</a>
     </div>
 </div>
 
-<!-- THE PROBLEM -->
 <div class="section">
     <div class="container">
         <div class="section-label">The Problem</div>
-        <h2 class="section-title">Defence governance operates in <span>cycles</span>.<br>Modern threats operate in <span>seconds</span>.</h2>
-        <p class="solution-text">
-            Every existing defence framework was built for a world where threats were slower than governance.
-            That world no longer exists. Adversaries operate at AI speed, across multiple domains simultaneously,
-            with tools that can compromise a command chain before a human analyst completes a threat assessment.
-            The gap between when something happens and when command understands it is where operations are lost.
-        </p>
-
+        <h2 class="section-title">Defence governance operates in <span>cycles</span>. Modern threats operate in <span>seconds</span>.</h2>
+        <p class="section-text">Every existing defence framework was built for a world where threats were slower than governance. That world no longer exists. Adversaries operate at AI speed, across multiple domains simultaneously, with tools that can compromise a command chain before a human analyst completes a threat assessment.</p>
         <div class="problem-grid">
-            <div class="problem-item">
-                <h4>The Decision Cycle Gap</h4>
-                <p>Intelligence that takes 10 minutes to reach command creates a cascading failure in dynamic targeting. By the time leadership understands the operational picture, the engagement is already decided.</p>
-            </div>
-            <div class="problem-item">
-                <h4>Multi-Domain Blindness</h4>
-                <p>Cyber, kinetic, hybrid, cognitive and space operations happen simultaneously. No existing framework reads across all domains in a single continuous operational picture.</p>
-            </div>
-            <div class="problem-item">
-                <h4>Posture Lag</h4>
-                <p>Command structures operating in defensive posture while the situation demands offensive action. The shift happens too late because no engine is continuously assessing when the balance must change.</p>
-            </div>
-            <div class="problem-item">
-                <h4>Signal Lost in Noise</h4>
-                <p>A 100-drone strike that is a shaping operation for something far larger. A canal infrastructure attack that is actually a strategic economic weapon. Tactical events misread because there is no engine connecting the dots in real time.</p>
-            </div>
-            <div class="problem-item">
-                <h4>Provenance Failure</h4>
-                <p>AI-generated orders, deepfake command, compromised intelligence feeds. Existing frameworks have no independent dimension for verifying the origin and chain of custody of orders and intelligence continuously.</p>
-            </div>
-            <div class="problem-item">
-                <h4>Command Accountability Gap</h4>
-                <p>As autonomous systems make decisions at operational speed, the accountability chain breaks. Who authorised this? Which system acted? When? Without continuous Evidence, these questions cannot be answered.</p>
-            </div>
+            <div class="problem-item"><h4>The Decision Cycle Gap</h4><p>A 10-minute intelligence lag to command creates cascading failure in dynamic targeting. By the time leadership understands the picture, the engagement is already decided.</p></div>
+            <div class="problem-item"><h4>Multi-Domain Blindness</h4><p>Cyber, kinetic, hybrid, cognitive and space operations happen simultaneously. No existing framework reads across all domains in a single continuous operational picture.</p></div>
+            <div class="problem-item"><h4>Posture Lag</h4><p>Command operating defensively while the situation demands offensive action. The shift happens too late because no engine continuously assesses when the balance must change.</p></div>
+            <div class="problem-item"><h4>Signal Lost in Noise</h4><p>A 100-drone strike that is a shaping operation for something larger. A canal attack that is a strategic economic weapon. Tactical events misread because nothing connects the dots in real time.</p></div>
+            <div class="problem-item"><h4>Provenance Failure</h4><p>AI-generated orders, deepfake command, compromised intelligence feeds. No existing framework independently verifies origin and chain of custody of orders continuously.</p></div>
+            <div class="problem-item"><h4>Command Accountability Gap</h4><p>As autonomous systems make decisions at operational speed, the accountability chain breaks. Who authorised this? Which system acted? When? Without continuous Evidence these questions cannot be answered.</p></div>
         </div>
-
         <div class="speed-gap">
             <div class="section-label">The Core Gap</div>
             <div class="speed-row">
-                <div class="speed-item">
-                    <div class="speed-number danger">10 min</div>
-                    <div class="speed-label">Intelligence lag<br>to command</div>
-                </div>
+                <div><div class="speed-number danger">10 min</div><div class="speed-label">Intelligence lag<br>to command</div></div>
                 <div class="speed-vs">vs</div>
-                <div class="speed-item">
-                    <div class="speed-number safe">Seconds</div>
-                    <div class="speed-label">Adversary decision<br>cycle speed</div>
-                </div>
+                <div><div class="speed-number key">Seconds</div><div class="speed-label">Adversary decision<br>cycle speed</div></div>
             </div>
-            <p class="speed-caption">
-                A 10-minute intelligence population gap creates a cascading failure in dynamic targeting operations.
-                CAGED closes this gap — continuous operational awareness at decision speed.
-            </p>
+            <p class="speed-caption">A 10-minute intelligence population gap creates cascading failure in dynamic targeting. CAGED closes this gap — continuous operational awareness at decision speed.</p>
         </div>
     </div>
 </div>
 
-<!-- THE SOLUTION -->
 <div class="section">
     <div class="container">
         <div class="section-label">The Solution</div>
-        <h2 class="section-title">CAGED — <span>Continuous</span> operational governance<br>at decision speed</h2>
-        <p class="solution-text">
-            CAGED is not a replacement for existing defence systems. It is the continuous governance layer
-            that reads across all of them simultaneously — integrating intelligence feeds, command systems,
-            domain sensors, and operational data into a single live engine that surfaces what command needs
-            to know, when they need to know it, at the right echelon.
-        </p>
-
+        <h2 class="section-title">CAGED — <span>Continuous</span> operational governance at decision speed</h2>
+        <p class="section-text">CAGED is not a replacement for existing defence systems. It is the continuous governance layer that reads across all of them simultaneously — integrating intelligence feeds, command systems, domain sensors and operational data into a single live engine.</p>
         <div class="process-steps">
-            <div class="step">
-                <div class="step-num">01</div>
-                <h4>Sense</h4>
-                <p>Continuous ingestion across all SPHERED dimensions simultaneously — cyber, kinetic, cognitive, space. Nothing operates in isolation.</p>
-            </div>
-            <div class="step">
-                <div class="step-num">02</div>
-                <h4>Orient</h4>
-                <p>Real-time pattern recognition across dimensions. A drone strike, a cyber event, a logistics disruption — read together, not in silos.</p>
-            </div>
-            <div class="step">
-                <div class="step-num">03</div>
-                <h4>Decide</h4>
-                <p>Command receives signal, not noise. The engine surfaces what matters at the right echelon — not everything to everyone.</p>
-            </div>
-            <div class="step">
-                <div class="step-num">04</div>
-                <h4>Act</h4>
-                <p>Posture assessment continuous. When the balance between defensive and offensive must shift, command knows before the window closes.</p>
-            </div>
+            <div class="step"><div class="step-num">01 — Sense</div><h4>Continuous Ingestion</h4><p>All SPHERED dimensions simultaneously — cyber, kinetic, cognitive, space. Nothing operates in isolation.</p></div>
+            <div class="step"><div class="step-num">02 — Orient</div><h4>Pattern Recognition</h4><p>Real-time reading across dimensions. A drone strike, a cyber event, a logistics disruption — read together, not in silos.</p></div>
+            <div class="step"><div class="step-num">03 — Decide</div><h4>Signal Not Noise</h4><p>Command receives what matters at the right echelon. Not everything to everyone. The right intelligence to the right level.</p></div>
+            <div class="step"><div class="step-num">04 — Act</div><h4>Posture Assessment</h4><p>Continuous. When the balance between defensive and offensive must shift, command knows before the window closes.</p></div>
         </div>
     </div>
 </div>
 
-<!-- EXPLORE -->
 <div class="section">
     <div class="container">
         <div class="section-label">Explore the Framework</div>
         <h2 class="section-title">Built on <span>SPHERED</span></h2>
-        <p class="solution-text">
-            CAGED operates across seven independent dimensions of operational defence — the SPHERED model.
-            Each dimension is equal, independent, and continuously monitored. Their interactions reveal
-            the risk relationships invisible to any single-domain approach.
-        </p>
-
+        <p class="section-text">CAGED operates across seven independent dimensions of operational defence — the SPHERED model. Each dimension is equal, independent, and continuously monitored.</p>
         <div class="nav-cards">
-            <a href="sphered.html" class="nav-card" style="border-top-color:#c8960b">
-                <div class="nc-label">Dimensional Model</div>
-                <h3 style="color:#c8960b">SPHERED</h3>
-                <p>The seven independent dimensions of operational defence. Security, Provenance, Hardening, Evidence, Resilience, Environment, Defence.</p>
-            </a>
-            <a href="caged-engine.html" class="nav-card" style="border-top-color:#4a7fa5">
-                <div class="nc-label">Engine</div>
-                <h3 style="color:#4a7fa5">The CAGED Engine</h3>
-                <p>How the continuous governance engine operates — Sense, Orient, Decide, Act. Decision cycle closed at operational speed.</p>
-            </a>
-            <a href="caged-corpus.html" class="nav-card" style="border-top-color:#3a8a62">
-                <div class="nc-label">Professional Canon</div>
-                <h3 style="color:#3a8a62">CAGED Corpus</h3>
-                <p>The ethical obligations and operational domains required to implement continuous defence governance.</p>
-            </a>
+            <a href="sphered.html" class="nav-card" style="border-top-color:#c8960b"><div class="nc-label">Dimensional Model</div><h3 style="color:#c8960b">SPHERED</h3><p>Seven independent dimensions of operational defence. Security, Provenance, Hardening, Evidence, Resilience, Environment, Defence.</p></a>
+            <a href="caged-engine.html" class="nav-card" style="border-top-color:#3a7a5a"><div class="nc-label">Engine</div><h3 style="color:#3a7a5a">The CAGED Engine</h3><p>How the continuous governance engine operates — Sense, Orient, Decide, Act. Decision cycle closed at operational speed.</p></a>
+            <a href="caged-corpus.html" class="nav-card" style="border-top-color:#4a6a8a"><div class="nc-label">Professional Canon</div><h3 style="color:#4a6a8a">CAGED Corpus</h3><p>The ethical obligations and operational domains required to implement continuous defence governance.</p></a>
         </div>
     </div>
 </div>
 
-<!-- FOOTER -->
 <footer>
     <div class="ft-left">
-        <strong style="color:#4a5568;letter-spacing:0.1em">CAGED Framework</strong> — Continuous Active Governance Engine for Defence<br>
+        <strong style="color:#3a5a3a;letter-spacing:0.1em">CAGED Framework</strong> — Continuous Active Governance Engine for Defence<br>
         Shamus Coghlan, CISSP &nbsp;·&nbsp; Berlin &nbsp;·&nbsp;
         <a href="https://www.linkedin.com/in/shamus-coghlan/" target="_blank">LinkedIn</a> &nbsp;·&nbsp;
         <a href="https://infocage.github.io/CAGE-/index.html" target="_blank">CAGE</a> &nbsp;·&nbsp;
@@ -461,5 +161,59 @@
     <div class="ft-right">Apache License 2.0 &nbsp;·&nbsp; infocage</div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const cc=document.getElementById('hero-cc');
+const canvas=document.getElementById('heroCanvas');
+const W=cc.clientWidth,H=cc.clientHeight;
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
+renderer.setSize(W,H);renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+const scene=new THREE.Scene();scene.background=new THREE.Color(0x040a06);
+const camera=new THREE.PerspectiveCamera(45,W/H,0.1,1000);camera.position.z=7;
+const ss=new THREE.Shape();
+ss.moveTo(0,2.5);ss.lineTo(-2,1.8);ss.lineTo(-2,-0.8);
+ss.quadraticCurveTo(-2,-2.5,0,-3.2);ss.quadraticCurveTo(2,-2.5,2,-0.8);
+ss.lineTo(2,1.8);ss.lineTo(0,2.5);
+const sg=new THREE.ExtrudeGeometry(ss,{depth:0.8,bevelEnabled:false});
+const sw=new THREE.LineSegments(new THREE.EdgesGeometry(sg),new THREE.LineBasicMaterial({color:0xe8d080,transparent:true,opacity:0.7}));
+sw.position.z=-0.4;scene.add(sw);
+const sm=new THREE.Mesh(sg,new THREE.MeshBasicMaterial({color:0x010501,side:THREE.DoubleSide,depthWrite:true}));
+sm.position.z=-0.41;scene.add(sm);
+scene.add(new THREE.Mesh(new THREE.SphereGeometry(2.8,32,32),new THREE.MeshBasicMaterial({color:0x1a6622,wireframe:true,transparent:true,opacity:0.45})));
+function createGear(radius,teeth,toothDepth){
+    const shape=new THREE.Shape();const step=(Math.PI*2)/teeth;
+    for(let i=0;i<teeth;i++){
+        const a1=i*step,a2=a1+step*0.35,a3=a1+step*0.65,a4=(i+1)*step;
+        const ir=radius,or=radius+toothDepth;
+        if(i===0)shape.moveTo(Math.cos(a1)*ir,Math.sin(a1)*ir);
+        else shape.lineTo(Math.cos(a1)*ir,Math.sin(a1)*ir);
+        shape.lineTo(Math.cos(a2)*or,Math.sin(a2)*or);
+        shape.lineTo(Math.cos(a3)*or,Math.sin(a3)*or);
+        shape.lineTo(Math.cos(a4)*ir,Math.sin(a4)*ir);
+    }
+    shape.closePath();
+    const hole=new THREE.Path();hole.absarc(0,0,radius*0.3,0,Math.PI*2,false);shape.holes.push(hole);
+    return shape;
+}
+const gearConfigs=[
+    {x:0,y:0.5,radius:0.48,teeth:10,color:0x7a5a08,emissive:0x4a3600,speed:0.02},
+    {x:-0.58,y:-0.54,radius:0.44,teeth:9,color:0x6a4e06,emissive:0x3a2800,speed:-0.022},
+    {x:0.58,y:-0.54,radius:0.44,teeth:9,color:0x6a4e06,emissive:0x3a2800,speed:-0.022},
+];
+const gears=[];
+gearConfigs.forEach(cfg=>{
+    const geo=new THREE.ExtrudeGeometry(createGear(cfg.radius,cfg.teeth,0.09),{depth:0.2,bevelEnabled:true,bevelThickness:0.03,bevelSize:0.03,bevelSegments:2});
+    const mat=new THREE.MeshPhongMaterial({color:cfg.color,emissive:cfg.emissive,emissiveIntensity:0.2,shininess:160,specular:0x332200});
+    const mesh=new THREE.Mesh(geo,mat);mesh.position.set(cfg.x,cfg.y,0.5);scene.add(mesh);
+    gears.push({mesh,speed:cfg.speed});
+});
+scene.add(new THREE.AmbientLight(0x020804,4));
+const l1=new THREE.PointLight(0xb07820,1.6);l1.position.set(2,4,5);scene.add(l1);
+const l2=new THREE.PointLight(0x040e04,0.8);l2.position.set(-2,-3,2);scene.add(l2);
+const sphere=scene.children.find(c=>c.type==='Mesh'&&c.material&&c.material.wireframe);
+function animate(){requestAnimationFrame(animate);if(sphere){sphere.rotation.y+=0.003;sphere.rotation.x+=0.001;}gears.forEach(g=>g.mesh.rotation.z+=g.speed);renderer.render(scene,camera);}
+animate();
+window.addEventListener('resize',()=>{const w=cc.clientWidth,h=cc.clientHeight;camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h);});
+</script>
 </body>
 </html>
