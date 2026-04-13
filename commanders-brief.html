@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Commander's Brief - C.A.G.E.D.</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#0b0c0f;color:#c8cdd6;min-height:100vh}
+nav{display:flex;justify-content:space-between;align-items:center;padding:18px 40px;border-bottom:1px solid rgba(255,255,255,0.04);position:sticky;top:0;background:rgba(4,10,6,0.97);z-index:100;backdrop-filter:blur(8px)}
+.nav-brand{font-size:1em;font-weight:600;letter-spacing:0.18em;color:#c8960b;text-decoration:none}
+.nav-links{display:flex;gap:32px}
+.nav-links a{color:#4a5a4a;text-decoration:none;font-size:0.82em;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover,.nav-links a.active{color:#c8cdd6}
+.bar{background:#8b1010;text-align:center;padding:7px;font-size:0.68em;letter-spacing:0.3em;color:#ffaaaa;text-transform:uppercase}
+
+.back{display:inline-block;padding:14px 0;font-size:0.78em;color:#3a5a3a;text-decoration:none;letter-spacing:0.1em}
+.back:hover{color:#c8cdd6}
+
+.wrap{max-width:900px;margin:0 auto;padding:20px 40px 80px}
+
+h1{font-size:2.4em;font-weight:200;color:#e2e8e0;letter-spacing:0.06em;margin:24px 0 8px}
+.tagline{font-size:1.05em;color:#4a5a4a;margin-bottom:48px}
+
+h2{font-size:1.1em;font-weight:500;color:#c8960b;letter-spacing:0.06em;margin:40px 0 20px;text-transform:uppercase}
+
+/* Big stat */
+.stat-row{display:flex;gap:24px;flex-wrap:wrap;margin-bottom:24px}
+.stat-box{background:#0a0f0a;border:1px solid #1a2a1a;border-top:2px solid #8b1010;padding:20px 24px;flex:1;min-width:180px;border-radius:2px}
+.stat-box .stat-num{font-size:2.2em;font-weight:200;color:#c8960b;letter-spacing:0.04em;margin-bottom:6px}
+.stat-box .stat-label{font-size:0.78em;color:#4a5a4a;line-height:1.6;letter-spacing:0.04em}
+
+.text-block{font-size:0.95em;color:#6a7a6a;line-height:1.9;margin-bottom:20px}
+.text-block strong{color:#b0c0b0;font-weight:500}
+
+ul.facts{list-style:none;margin-bottom:20px}
+ul.facts li{font-size:0.92em;color:#5a6a5a;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.03);line-height:1.6}
+ul.facts li:last-child{border-bottom:none}
+ul.facts li strong{color:#9aaa9a;font-weight:500}
+
+/* Capability grid */
+.cap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:24px}
+.cap{background:#0a0f0a;border:1px solid #1a2a1a;border-left:2px solid #c8960b;padding:18px 20px;border-radius:2px}
+.cap h4{font-size:0.82em;color:#9a9a8a;font-weight:500;margin-bottom:8px;letter-spacing:0.04em}
+.cap p{font-size:0.82em;color:#4a5a4a;line-height:1.65}
+
+/* Compare */
+.compare{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;margin-bottom:24px;border:1px solid #1a2a1a;border-radius:2px;overflow:hidden}
+.col{padding:20px}
+.col h4{font-size:0.72em;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.col p{font-size:0.88em;line-height:1.7}
+.col-old{background:#0d0808}
+.col-old h4{color:#8b3030}
+.col-old p{color:#5a3a3a}
+.col-threat{background:#0a0a08}
+.col-threat h4{color:#8a7a2a}
+.col-threat p{color:#5a5a3a}
+.col-caged{background:#080d08}
+.col-caged h4{color:#3a7a3a}
+.col-caged p{color:#3a5a3a}
+
+.nav-links-bottom{display:flex;gap:14px;flex-wrap:wrap;margin-top:40px;padding-top:32px;border-top:1px solid #1a2a1a}
+.btn-p{background:#c8960b;color:#020402;padding:12px 28px;border-radius:2px;text-decoration:none;font-size:0.78em;font-weight:700;letter-spacing:0.12em;text-transform:uppercase}
+.btn-p:hover{background:#e8b020}
+.btn-s{border:1px solid #2a3a2a;color:#4a5a4a;padding:12px 28px;border-radius:2px;text-decoration:none;font-size:0.78em;letter-spacing:0.12em;text-transform:uppercase}
+.btn-s:hover{color:#c8cdd6;border-color:#4a6a4a}
+
+footer{padding:24px 40px;border-top:1px solid rgba(255,255,255,0.04);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;background:#040a06}
+.ft{font-size:0.75em;color:#2a3a2a;line-height:1.9}
+.ft a{color:#3a5a3a;text-decoration:none}
+@media(max-width:680px){
+  nav{padding:14px 20px}.nav-links{display:none}
+  .wrap{padding:16px 20px 60px}
+  h1{font-size:1.7em}
+  .compare{grid-template-columns:1fr}
+  footer{padding:20px}
+}
+</style>
+</head>
+<body>
+<nav>
+<a class="nav-brand" href="index.html">C.A.G.E.D.</a>
+<div class="nav-links">
+<a href="sphered.html">SPHERED</a>
+<a href="caged-engine.html">Engine</a>
+<a href="commanders-brief.html" class="active">Commander's Brief</a>
+<a href="caged-corpus.html">Corpus</a>
+<a href="https://infocage.github.io/CAGE-/index.html" target="_blank">CAGE</a>
+</div>
+</nav>
+<div class="bar">Commander's Brief &nbsp;&#183;&nbsp; C.A.G.E.D.</div>
+
+<div class="wrap">
+<a class="back" href="index.html">&#8592; Back to CAGED</a>
+
+<h1>Commander's Brief</h1>
+<div class="tagline">Why Continuous Operational Governance Is Now Mission-Critical</div>
+
+<h2>The Operational Problem</h2>
+<p class="text-block">Defence and security operations face a critical governance gap: <strong>human decision cycles cannot keep pace with AI-speed threats operating across multiple domains simultaneously.</strong> Intelligence is delayed, compromised, or overwhelming. AI systems deployed in the field drift from their intended parameters undetected. When a system fails, the cause is unknown until after the damage is done. Command makes decisions on a picture that is already out of date.</p>
+
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="stat-num">10 min</div>
+    <div class="stat-label">Average intelligence lag to command — enough time for an operation to be irreversibly compromised</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-num">$4M</div>
+    <div class="stat-label">Cost of a missile fired at a $40K drone — the price of operating without continuous risk assessment</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-num">0</div>
+    <div class="stat-label">Existing frameworks that continuously govern AI systems against their own intent in operational environments</div>
+  </div>
+</div>
+
+<h2>The Threat Reality</h2>
+<ul class="facts">
+  <li><strong>AI-speed adversaries:</strong> Threats now operate faster than any human governance cycle can detect, assess, and respond to.</li>
+  <li><strong>AI system drift:</strong> Automated systems deployed in complex environments are manipulated through data poisoning — without being directly compromised.</li>
+  <li><strong>Proportionality failure:</strong> Without live risk assessment, automated responses cannot match threat value — exhausting strategic resources at scale.</li>
+  <li><strong>Intelligence integrity:</strong> Deepfake command signals, poisoned intelligence feeds, and AI-generated orders are indistinguishable from legitimate inputs without continuous provenance verification.</li>
+  <li><strong>Accountability gap:</strong> As autonomous systems make decisions at operational speed, the chain of accountability breaks. When something fails, nobody can answer why — immediately.</li>
+</ul>
+
+<h2>The CAGED Solution</h2>
+<p class="text-block">CAGED is a <strong>continuous active governance framework</strong> that connects every system already in your operational environment into a single verified picture — updated in real time, across every domain, simultaneously offensive and defensive. It uses AI to govern AI. It ensures the right intelligence reaches the right commander at the right moment. And when something fails, the answer is already there.</p>
+
+<div class="cap-grid">
+  <div class="cap"><h4>Full Situational Awareness</h4><p>Real-time operational picture across cyber, kinetic, hybrid, cognitive and space domains — simultaneously offensive and defensive.</p></div>
+  <div class="cap"><h4>AI Governing AI</h4><p>Continuous verification that every automated system is operating within its intended parameters. Adversary manipulation detected before it acts.</p></div>
+  <div class="cap"><h4>Proportional Response</h4><p>Live risk assessment ensures response matches actual threat value. Strategic resources preserved for strategic threats.</p></div>
+  <div class="cap"><h4>Instant Accountability</h4><p>Continuous audit trail across every decision and automated action. When something fails, the cause is known immediately.</p></div>
+  <div class="cap"><h4>Command Intelligence</h4><p>The right information to the right echelon at the right moment. Signal, not noise.</p></div>
+  <div class="cap"><h4>Multi-Domain by Design</h4><p>One framework governing across all operational theatres. No domain operates outside the picture.</p></div>
+</div>
+
+<h2>A Fundamental Principle</h2>
+<p class="text-block" style="background:#0a0808;border-left:3px solid #8b1010;padding:20px 24px;border-radius:2px;color:#8a7a7a"><strong style="color:#c8cdd6;display:block;margin-bottom:10px">Certain decisions must always remain with a human commander. Without exception.</strong>Nuclear release. Strategic strikes. Actions that cannot be undone. No automation, no AI, no governance framework removes that human decision point. CAGED is designed to ensure the commander who makes those decisions has the clearest, most accurate, most current picture possible — but the decision itself stays human. This is not a limitation of the framework. It is a core design principle, aligned with NATO doctrine, international humanitarian law, and the Rules of Engagement that define lawful military action.</p>
+
+<h2>From Periodic to Continuous</h2>
+<div class="compare">
+  <div class="col col-old">
+    <h4>Current State</h4>
+    <p>Periodic reviews. Intelligence assessed in cycles. AI systems ungoverned between audits. Failures investigated after the fact. Command operating blind.</p>
+  </div>
+  <div class="col col-threat">
+    <h4>Threat Reality</h4>
+    <p>Continuous. AI-speed. Multi-domain. Simultaneous offensive and defensive operations. No pause between attacks for governance cycles to catch up.</p>
+  </div>
+  <div class="col col-caged">
+    <h4>CAGED</h4>
+    <p>Continuous. Real-time. Every domain. AI governed against its own intent. Command always has the right picture. Failures resolved immediately.</p>
+  </div>
+</div>
+
+<h2>Why This Matters to Command</h2>
+<ul class="facts">
+  <li><strong>Operational advantage:</strong> Ukraine proved faster decision cycles defeat larger forces on slower governance loops. CAGED closes the decision cycle gap.</li>
+  <li><strong>Risk reduction:</strong> Continuous real-time risk assessment eliminates disproportionate automated responses and the strategic costs they carry.</li>
+  <li><strong>AI assurance:</strong> Every AI system operating in your environment is continuously verified against its intended parameters. No ungoverned autonomous action.</li>
+  <li><strong>Full accountability:</strong> Complete audit trail across all automated and human decisions. Rules of Engagement accountability maintained continuously.</li>
+  <li><strong>Coalition ready:</strong> Open framework, NATO-compatible, designed for interoperability across member states and partner nations.</li>
+</ul>
+
+<div class="nav-links-bottom">
+  <a href="https://www.linkedin.com/in/shamus-coghlan/" target="_blank" class="btn-p">Request a Briefing</a>
+  <a href="sphered.html" class="btn-s">SPHERED Model</a>
+  <a href="caged-engine.html" class="btn-s">The Engine</a>
+  <a href="index.html" class="btn-s">Full Framework</a>
+</div>
+
+</div>
+
+<footer>
+<div class="ft">
+<strong style="color:#3a5a3a">CAGED Framework</strong> — Continuous Active Governance Engine for Defence<br>
+Shamus Coghlan, CISSP &nbsp;&#183;&nbsp; Berlin &nbsp;&#183;&nbsp;
+<a href="https://www.linkedin.com/in/shamus-coghlan/" target="_blank">LinkedIn</a> &nbsp;&#183;&nbsp;
+<a href="https://infocage.github.io/CAGE-/index.html" target="_blank">CAGE</a> &nbsp;&#183;&nbsp;
+<a href="https://infocage.github.io/kultr" target="_blank">KULTR</a>
+</div>
+<div class="ft" style="text-align:right">Apache License 2.0 &nbsp;&#183;&nbsp; infocage</div>
+</footer>
+</body>
+</html>
